@@ -1,18 +1,31 @@
 package config
 
-import "github.com/kelseyhightower/envconfig"
+import (
+	"log"
 
-type DB struct {
-	Port    string `split_words:"true" default:"8080"`
-	LogFile string `split_words:"true" default:"webapp.log"`
-	Driver  string `split_words:"true" default:"sqlite3"`
-	Name    string `split_words:"true" default:"webapp.sql"`
+	"gopkg.in/go-ini/ini.v1"
+)
+
+type ConfigList struct {
+	Port      string
+	SQLDriver string
+	DbName    string
 }
 
-func NewDB() (DB, error) {
-	conf := DB{}
-	if err := envconfig.Process("DB", &conf); err != nil {
-		return conf, err
+var Config ConfigList
+
+func init() {
+	LoadConfig()
+}
+
+func LoadConfig() {
+	cfg, err := ini.Load("config.ini")
+	if err != nil {
+		log.Fatalln(err)
 	}
-	return conf, nil
+	Config = ConfigList{
+		Port:      cfg.Section("web").Key("port").MustString("8080"),
+		SQLDriver: cfg.Section("db").Key("driver").String(),
+		DbName:    cfg.Section("db").Key("name").String(),
+	}
 }
