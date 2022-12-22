@@ -1,1 +1,1 @@
-# go_crud_app
+# sqlite_go
