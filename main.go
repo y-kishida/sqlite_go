@@ -6,7 +6,9 @@ import (
 )
 
 func main() {
-	todos, _ := models.GetTodos()
+	user, _ := models.GetUser(0)
+
+	todos, _ := user.GetTodosByUser()
 	for i := range todos {
 		fmt.Println(todos[i])
 	}
