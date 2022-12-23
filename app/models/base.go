@@ -37,13 +37,12 @@ func init() {
 
 	cmdT := fmt.Sprintf(`CREATE TABLE IF NOT EXISTS %s(
 		id INTEGER PRIMARY KEY AUTOINCREMENT,
-		uuid STRING NOT NUll UNIQUE,
-		name STRING,
-		email STRING,
-		password STRING,
+		content TEXT,
+		user_id INTEGER,
 		created_at DATETIME)`, tableNameTodo)
 
 	Db.Exec(cmdT)
+
 }
 
 func createUUID() (uuidobj uuid.UUID) {
