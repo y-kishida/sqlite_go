@@ -15,4 +15,7 @@ func main() {
 	user, _ := models.GetUser(2)
 	user.CreateTodo("First Todo")
 	fmt.Println(models.Db)
+
+	todo, _ := models.GetTodo(1)
+	fmt.Println(todo)
 }
