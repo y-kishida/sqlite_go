@@ -6,10 +6,10 @@ import (
 )
 
 func main() {
-	user, _ := models.GetUser(0)
+	todo, _ := models.GetTodo(1)
+	fmt.Println(todo)
 
-	todos, _ := user.GetTodosByUser()
-	for i := range todos {
-		fmt.Println(todos[i])
-	}
+	todo.Content = "update content"
+	todo.UpdateTodo()
+	fmt.Println("after update", todo)
 }
