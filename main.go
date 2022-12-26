@@ -9,7 +9,6 @@ func main() {
 	todo, _ := models.GetTodo(1)
 	fmt.Println(todo)
 
-	todo.Content = "update content"
-	todo.UpdateTodo()
-	fmt.Println("after update", todo)
+	todo.DeleteTodo()
+	fmt.Println(todo)
 }
